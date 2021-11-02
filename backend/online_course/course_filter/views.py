@@ -18,7 +18,7 @@ def quick_search(request):
         try:
             content = request.data['Input']
         except KeyError:
-            return Response("4 parameters are all required.(StartStation,EndStation,OutWardSearchDate,OutWardSearchTime)", status=status.HTTP_400_BAD_REQUEST)
+            return Response("No Input Data", status=status.HTTP_400_BAD_REQUEST)
 
         potentioal_tid = Teacher.objects.filter(teacher_name__icontains=content).values('teacher_id')
         potential_course = list(Course.objects.filter(
