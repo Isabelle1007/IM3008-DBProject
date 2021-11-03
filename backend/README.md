@@ -32,7 +32,6 @@ pip list # check
 **在虛擬環境執行以下指令，以開啟環境伺服器**
 ```shell=
 cd online_course
-python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
