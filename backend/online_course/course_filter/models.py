@@ -5,20 +5,20 @@ from django.db.models.fields import FloatField
 class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
     course_name = models.TextField()
-    course_description = models.TextField(blank=True, null=True)
+    course_intro = models.TextField(blank=True, null=True)
     course_url = models.URLField()
-    course_img = models.URLField(blank=True)
-    max_price = models.IntegerField(blank=True, null=True)
-    min_price = models.IntegerField()
-    rating = models.FloatField()
-    length = models.IntegerField(blank=True, null=True)
+    course_img_url = models.URLField(blank=True)
+    #max_price = models.IntegerField(blank=True, null=True)
+    #min_price = models.IntegerField()
+    #rating = models.FloatField()
+    course_time = models.IntegerField(blank=True, null=True)
     teacher = models.ForeignKey('Teacher', on_delete=models.CASCADE, related_name='teacher')
     website = models.ForeignKey('Website', on_delete=models.CASCADE, related_name='website')
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='category')
-    status = models.ForeignKey('Status', on_delete=models.CASCADE, related_name='status')
+    #category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='category')
+    #status = models.ForeignKey('Status', on_delete=models.CASCADE, related_name='status')
 
     class Meta:
-        db_table = "schema'.'course"
+        db_table = 'COURSE"."course'
 
     def __str__(self) -> str:
         return self.course_name
@@ -31,7 +31,7 @@ class Teacher(models.Model):
     teacher_introduction = models.TextField(blank=True, null=True)
 
     class Meta:
-        db_table = "schema'.'teacher"
+        db_table = 'COURSE"."teacher'
     
     def __str__(self) -> str:
         return self.teacher_id
@@ -42,7 +42,7 @@ class Website(models.Model):
     website_url = models.URLField()
 
     class Meta:
-        db_table = "schema'.'website"
+        db_table = 'COURSE"."website'
     
     def __str__(self) -> str:
         return self.website_id
@@ -53,7 +53,7 @@ class Status(models.Model):
     status_description = models.TextField()
 
     class Meta:
-        db_table = "schema'.'status"
+        db_table = 'COURSE"."status'
     
     def __str__(self) -> str:
         return self.status_description
@@ -66,7 +66,7 @@ class Fundraising(models.Model):
     course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='fund_on_course')
 
     class Meta:
-        db_table = "schema'.'fundraising"
+        db_table = 'COURSE"."fundraising'
     
     def __str__(self):
         return self.fundraising_id
@@ -78,7 +78,7 @@ class Discount(models.Model):
     course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name='discount_on_course')
 
     class Meta:
-        db_table = "schema'.'discount"
+        db_table = 'COURSE"."discount'
 
     def __str__(self):
         return self.discount_id
@@ -90,18 +90,19 @@ class StudentsCount(models.Model):
     update_date = models.DateTimeField()
 
     class Meta:
-        db_table = "schema'.'students_count"
+        db_table = 'COURSE"."students_count'
     
     def __str__(self):
         return f'{self.course}:{self.students_count}'
 
-
+'''
 class Category(models.Model):
     category_id = models.TextField(primary_key=True)
     category_name = models.TextField()
 
     class Meta:
-        db_table = "schema'.'category"
+        db_table = 'COURSE"."category'
     
     def __str__(self):
         return self.category_name
+'''
