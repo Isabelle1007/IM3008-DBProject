@@ -31,6 +31,7 @@ pip list # check
 ## Start Django Server
 **在虛擬環境執行以下指令，以安裝所需套件**
 ```shell=
+cd online_course
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
