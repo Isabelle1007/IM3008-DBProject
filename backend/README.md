@@ -29,7 +29,7 @@ pip list # check
 * `DATABASE_URL=postgres://postgres:<passord>@127.0.0.1:5432/DBP` 更改此行將 <password> 改為自己 postgres 的密碼。
   
 ## Start Django Server
-**在虛擬環境執行以下指令，以安裝所需套件**
+**在虛擬環境執行以下指令，以開啟環境伺服器**
 ```shell=
 cd online_course
 python manage.py makemigrations
