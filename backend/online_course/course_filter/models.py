@@ -3,19 +3,20 @@ from django.db.models.fields import FloatField
 
 # Create your models here.
 class Course(models.Model):
-    course_id = models.AutoField(primary_key=True)
+    course_id = models.TextField(primary_key=True)
     course_name = models.TextField()
     course_intro = models.TextField(blank=True, null=True)
     course_url = models.URLField()
     course_img_url = models.URLField(blank=True)
+    course_price = models.IntegerField(blank=True)
     #max_price = models.IntegerField(blank=True, null=True)
     #min_price = models.IntegerField()
     #rating = models.FloatField()
     course_time = models.IntegerField(blank=True, null=True)
     teacher = models.ForeignKey('Teacher', on_delete=models.CASCADE, related_name='teacher')
     website = models.ForeignKey('Website', on_delete=models.CASCADE, related_name='website')
-    #category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='category')
-    #status = models.ForeignKey('Status', on_delete=models.CASCADE, related_name='status')
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='category')
+    status = models.ForeignKey('Status', on_delete=models.CASCADE, related_name='status')
 
     class Meta:
         db_table = 'COURSE"."course'
@@ -39,6 +40,7 @@ class Teacher(models.Model):
 
 class Website(models.Model):
     website_id = models.TextField(primary_key=True)
+    website_name = models.TextField()
     website_url = models.URLField()
 
     class Meta:
@@ -95,7 +97,7 @@ class StudentsCount(models.Model):
     def __str__(self):
         return f'{self.course}:{self.students_count}'
 
-'''
+
 class Category(models.Model):
     category_id = models.TextField(primary_key=True)
     category_name = models.TextField()
@@ -105,4 +107,17 @@ class Category(models.Model):
     
     def __str__(self):
         return self.category_name
-'''
+
+
+class Review(models.Model):
+    review_id = models.TextField(primary_key=True)
+    review_content = models.TextField()
+    review_star = models.IntegerField(null=True, blank=True)
+    review_time = models.DateTimeField()
+    course = models.ForeignKey('Course', on_delete=models.CASCADE, related_name="reviews_of_course")
+
+    class Meta:
+        db_table = 'COURSE"."review'
+    
+    def __str__(self):
+        return self.review_content
