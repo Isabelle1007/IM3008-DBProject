@@ -13,25 +13,26 @@ def Course_Sorting(courses: Course, method): # 課程排序機制
     if method == 'Default':
         return sorted(courses, key=lambda d: d['course_name'])
     elif method == '價格由低到高':
-        return sorted(courses, key=lambda d: d['course_price', 'course_name'])
+        return sorted(courses, key=lambda d: d['course_price'], reverse=False)
     elif method == '價格由高到低':
-        return sorted(courses, key=lambda d: d['course_price', 'course_name'], reverse=True)
+        return sorted(courses, key=lambda d: d['course_price'], reverse=True)
     elif method == '課程時長從少到多':
-        return sorted(courses, key=lambda d: d['course_time', 'course_name'])
+        return sorted(courses, key=lambda d: d['course_time'], reverse=False)
     elif method == '課程時長從多到少':
-        return sorted(courses, key=lambda d: d['course_time', 'course_name'], reverse=True)
+        return sorted(courses, key=lambda d: d['course_time'], reverse=True)
     elif method == '學生人數從少到多':
-        return sorted(courses, key=lambda d: d['course_students', 'course_name'])
+        return sorted(courses, key=lambda d: d['course_students'], reverse=False)
     elif method == '學生人數從多到少':
-        return sorted(courses, key=lambda d: d['course_students', 'course_name'], reverse=True)
+        return sorted(courses, key=lambda d: d['course_students'], reverse=True)
     elif method == '評價數從少到多':
-        return sorted(courses, key=lambda d: d['review_count', 'course_name'])
+        return sorted(courses, key=lambda d: d['review_count'], reverse=False)
     elif method == '評價數從多到少':
-        return sorted(courses, key=lambda d: d['review_count', 'course_name'], reverse=True)
+        return sorted(courses, key=lambda d: d['review_count'], reverse=True)
     return []
 
 def Course_Return_Form(courses): # 課程回傳格式
     result = []
+
     for i in range(len(courses)):
         data = {}
         data['course_name'] = courses[i]['course_name']
