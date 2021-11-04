@@ -14,9 +14,9 @@ export default function SearchPage ()
             <button id="Random_button">按此隨機搜尋好課</button>
             <div className="search_bar">
                 <input id="searchform" placeholder="🔍搜尋"/>
-                <button type="submit" form="searchform">➜</button>
+                <button id="submit_button" type="submit" form="searchform">➜</button>
             </div>
-            {/* TODO: Write the css. It looks ugly as hell now */}
+            {/* TODO: coloring the elements */}
             <button id="advanced_option" onClick={()=>setAdv_search(!adv_search)}>▼ Advanced Options</button>
             {
                 adv_search ?
@@ -39,7 +39,8 @@ export default function SearchPage ()
                     </div>
                     <div className="price">
                         <p>價格</p> <br/>
-                        {/* FIXME The slider won't center 😥 */}
+                        {/* FIXME The slider's first input is tranparent */}
+                        {/* REVIEW Is it a big deal though */}
                         <DualSlider min={0} max={10000} step={1000}/>
                     </div>
                     <br/>

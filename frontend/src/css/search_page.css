@@ -2,7 +2,67 @@
     background-color: #EBE8E4;
 }
 
+.search_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.search_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 100%;
+}
+#searchform {
+    width: 50%;
+    height: 40px;
+    font-size: x-large;
+}
+
+#submit_button {
+    height: 40px;
+}
+
 #advanced_option {
+    display: flex;
+    flex: 0 0 100%;
+    margin-left: 45%;
     border: none;
-    background-color: white;
+    font-size: large;
+}
+
+.advanced_condition {
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    /* margin-left: 25%; */
+}
+
+.advanced_condition > div {
+    font-size: large;
+    display: flex;
+    flex: 0 0 100%;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* FIXME the choices will wrap underneath the option name, which is ugly */
+.advanced_condition > div > * {
+    font-size: medium;
+}
+
+.advanced_condition > div > p {
+    font-size: large;
+    margin-right: 25px;
+}
+
+#Random_button {
+    width: 20%;
+    height: 30px;
+    font-size: 18px;
+    margin-bottom: 15px;
 }

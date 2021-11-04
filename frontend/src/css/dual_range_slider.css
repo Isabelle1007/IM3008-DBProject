@@ -51,10 +51,11 @@ input[type=range]::-webkit-slider-thumb::before {
 }
  
 .dual_slider {
-    position: relative;
+    /* position: relative; */
     height: 50px;
-    /* display: flex; */
-    /* align-content: center; */
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
 }
 
 .dual_slider > input[type=range] {
