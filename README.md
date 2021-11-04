@@ -12,13 +12,29 @@
 * 黃晨亘: User Needs Research, Backend
 
 ## Target
-整合臺灣四個較具規模的線上課程平台（Hahow、TibaMe、Pressplay、Yotta）之課程相關資訊，讓使用者能透過本網站取得及比較該四個平台的課程資訊，進而選擇最符合需求的線上課程平台進行消費。
+整合臺灣四個較具規模的線上課程平台（Hahow、TibaMe、PressPlay、Yotta）之課程相關資訊，讓使用者能透過本網站取得及比較該四個平台的課程資訊，進而選擇最符合需求的線上課程平台進行消費。
 
 ## [Expected Interface](https://drive.google.com/file/d/14wYfgA65QhYEDV0naj6it6fKj0nA_tJf/view)
 
 
 ## Data Collection
-* Collect data by web crawling.
+Collect data by web crawling.
+* Hahow
+`import urllib.request as req
+import json
+`
+* TibaMe: urllib
+`import urllib.request as req
+import json
+`
+* PressPlay: BeautifulSoup + WebDriver
+`from bs4 import BeautifulSoup
+import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import time
+import re/
+* Yotta
 
 
 ## Database
