@@ -10,9 +10,7 @@ import datetime
 
 
 def Course_Sorting(courses: Course, method): # 課程排序機制
-    if method == 'Default':
-        return sorted(courses, key=lambda d: d['course_name'])
-    elif method == '價格由低到高':
+    if method == '價格由低到高':
         return sorted(courses, key=lambda d: d['course_price'], reverse=False)
     elif method == '價格由高到低':
         return sorted(courses, key=lambda d: d['course_price'], reverse=True)
@@ -28,7 +26,7 @@ def Course_Sorting(courses: Course, method): # 課程排序機制
         return sorted(courses, key=lambda d: d['review_count'], reverse=False)
     elif method == '評價數從多到少':
         return sorted(courses, key=lambda d: d['review_count'], reverse=True)
-    return []
+    return sorted(courses, key=lambda d: d['course_name'])
 
 def Course_Return_Form(courses): # 課程回傳格式
     result = []
@@ -106,19 +104,39 @@ def search_all(request):
         except KeyError:
             return Response("No Input Data", status=status.HTTP_400_BAD_REQUEST)
         
-        potential_category = list(Category.objects.filter(category_name__in=category).values('category_id'))
-        potential_web = Website.objects.filter(website_name__in=website).values('website_id')
-        potential_status = Status.objects.filter(status_description__in=status_type).values('status_id')
+        if category == []:
+            potential_category = Category.objects.values('category_id')
+        else:
+            potential_category = Category.objects.filter(category_name__in=category).values('category_id')
+        if website == []:
+            potential_web = Website.objects.values('website_id')
+        else:
+            potential_web = Website.objects.filter(website_name__in=website).values('website_id')
+        if status == []:
+            potential_status = Status.objects.values('status_id')
+        else:
+            potential_status = Status.objects.filter(status_description__in=status_type).values('status_id')
+        
+        if time_range == []:
+            time_range = [0, 100000]
+        elif len(time_range) == 1:
+            time_range.insert(0, 0)
+        
+        if price_range == []:
+            price_range = [0, 100000]
+        elif len(time_range) == 1:
+            price_range.insert(0, 0)
+
+        #print(potential_category, potential_status, potential_web)
 
         potential_course = list(Course.objects.filter(
             Q(course_name__contains=content) &
-            #Q(category_id__in=potential_category) &
+            Q(category_id__in=potential_category) &
             Q(course_time__lte=int(time_range[1])) & 
             Q(course_time__gte=int(time_range[0])) &
             Q(website_id__in=potential_web) &
             Q(status_id__in=potential_status)).values())
         
-        #potential_course = list(Course.objects.filter(course_intro__contains=content).values())
         result = Course_Sorting(Course_Return_Form(potential_course), method)
         return Response(result, status=status.HTTP_200_OK)
 
