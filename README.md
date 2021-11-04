@@ -1,5 +1,5 @@
 # IM3008-Database Management Midterm Project
-# 台灣線上課程平台資訊整合網站
+# 臺灣線上課程平台資訊整合網站
 
 ## Contributor and Tasks
 * 楊佳芊: Data Collection
@@ -23,8 +23,9 @@
 
 ## Database
 * Use **PostgreSQL 14** and **pgAdmin**.
+* [Schema](https://docs.google.com/document/d/1AjMX5Hs602QL3lLvPsvIHbf54I3vYUznJEZKZNKioo8/edit)
 * [How to export db to a .sql file](https://stackoverflow.com/questions/37984733/postgresql-database-export-to-sql-file)
-* [Schema](https://drive.google.com/drive/u/1/folders/1GssFT7IbZgx6FETD6IzUqBgVSUw7BDop)
+
 
 **\*: primary key**
 ### course
@@ -85,6 +86,17 @@
 
 ### discount
 記錄各課程的優惠資訊
+
+### bookmark
+記錄各課程的標籤，方便使用者進行分類
+
+### tag
+
+### buyer
+
+### status
+
+`後面幾個是最近更新的，所以爬蟲那邊還沒整理成表，我之後補！`
 
 ## Backend
 * [API Design](https://hackmd.io/@K2V5EFQlTWCP33CWgxiuKg/Sy3baYQ8F/)
