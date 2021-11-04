@@ -44,12 +44,14 @@ def Course_Return_Form(courses): # 課程回傳格式
             
         status_description = Status.objects.filter(status_id = courses[i]['status_id']).values('status_description')[0]['status_description']
         data['status'] = status_description
-        teacher_name = Teacher.objects.filter(teacher_id = courses[i]['teacher_id']).values('teacher_name')[0]['teacher_name']
-        data['teacher_name'] = teacher_name
-        #students_count = StudentsCount.objects.filter(course_id = courses[i]['course_id']).values('students_count')[0]['students_count']
-        #data['students_count'] = students_count
         website_name = Website.objects.filter(website_id = courses[i]['website_id']).values('website_name')[0]['website_name']
         data['website_name'] = website_name
+        teacher_name = Teacher.objects.filter(teacher_id = courses[i]['teacher_id']).values('teacher_name')[0]['teacher_name']
+        data['teacher_name'] = teacher_name
+        #category_name = Category.objects.filter(category_id = courses[i]['course_id']).values('category_name')[0]['category_name']
+        #data['category_name'] = category_name
+        #students_count = StudentsCount.objects.filter(course_id = courses[i]['course_id']).values('students_count')[0]['students_count']
+        #data['students_count'] = students_count
         reviews = len(list(Review.objects.filter(course_id = str(courses[i]['course_id'])).values()))
         data['review_count'] = reviews
         #print(courses[i])
@@ -95,25 +97,29 @@ def search_all(request):
             content = request.data['Input']
             category = request.data['Category']
             tag = request.data['Tags']
-            website = request.data['Websites']
-            sort = request.data['Sorting_method']
+            website = request.data['Website']
+            method = request.data['Sorting_method']
             students_range = request.data['Students_range']
             price_range = request.data['Price_range']
-            time_range = request.data['time_range']
-            status_type = request.data['status']
+            time_range = request.data['Time_range']
+            status_type = request.data['Status']
         except KeyError:
             return Response("No Input Data", status=status.HTTP_400_BAD_REQUEST)
-
-        potential_tid = Teacher.objects.filter(teacher_name__contains=content).values('teacher_id')
         
+        potential_category = list(Category.objects.filter(category_name__in=category).values('category_id'))
+        potential_web = Website.objects.filter(website_name__in=website).values('website_id')
+        potential_status = Status.objects.filter(status_description__in=status_type).values('status_id')
+        print(potential_category, potential_web, potential_status)
         potential_course = list(Course.objects.filter(
-            Q(course_name__contains=content) |
-            Q(teacher_id__in=potential_tid) |
-            Q(course_intro__contains=content)).values())
-        
+            Q(course_name__contains=content) &
+            #Q(category_id__in=potential_category) &
+            Q(course_time__lte=int(time_range[1])) & 
+            Q(course_time__gte=int(time_range[0])) &
+            Q(website_id__in=potential_web) &
+            Q(status_id__in=potential_status)).values())
+        print(potential_course)
         #potential_course = list(Course.objects.filter(course_intro__contains=content).values())
-        result = Course_Return_Form(potential_course)
-    
+        result = Course_Sorting(Course_Return_Form(potential_course), method)
         return Response(result, status=status.HTTP_200_OK)
 
 
