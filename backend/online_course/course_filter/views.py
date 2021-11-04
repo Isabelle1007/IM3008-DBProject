@@ -109,7 +109,7 @@ def search_all(request):
         potential_category = list(Category.objects.filter(category_name__in=category).values('category_id'))
         potential_web = Website.objects.filter(website_name__in=website).values('website_id')
         potential_status = Status.objects.filter(status_description__in=status_type).values('status_id')
-        print(potential_category, potential_web, potential_status)
+
         potential_course = list(Course.objects.filter(
             Q(course_name__contains=content) &
             #Q(category_id__in=potential_category) &
@@ -117,7 +117,7 @@ def search_all(request):
             Q(course_time__gte=int(time_range[0])) &
             Q(website_id__in=potential_web) &
             Q(status_id__in=potential_status)).values())
-        print(potential_course)
+        
         #potential_course = list(Course.objects.filter(course_intro__contains=content).values())
         result = Course_Sorting(Course_Return_Form(potential_course), method)
         return Response(result, status=status.HTTP_200_OK)
