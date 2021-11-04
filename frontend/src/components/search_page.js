@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../css/search_page.css"
+import DualSlider from './dual_range_slider'
+
 
 export default function SearchPage ()
 {
@@ -14,7 +16,7 @@ export default function SearchPage ()
                 <input id="searchform" placeholder="🔍搜尋"/>
                 <button type="submit" form="searchform">➜</button>
             </div>
-            {/* TODO: Find a way to organize this. It looks ugly as hell now */}
+            {/* TODO: Write the css. It looks ugly as hell now */}
             <button id="advanced_option" onClick={()=>setAdv_search(!adv_search)}>▼ Advanced Options</button>
             {
                 adv_search ?
@@ -23,7 +25,7 @@ export default function SearchPage ()
                         <p>平台</p>
                         {
                             ["Hahow", "TibaMe", "Yotta", "PressPlay"].map((text, index) =>{
-                                return <Checkbox_item id={`platform_option${index}`} text={text} />
+                                return <Checkboxitem id={`platform_option${index}`} text={text} />
                             })
                         }
                     </div>
@@ -31,27 +33,32 @@ export default function SearchPage ()
                         <p>主題</p>
                         {
                             ["語言", "藝術", "設計", "多媒體設計", "程式", "行銷", "投資理財", "職場技能", "生活品味"].map((text, index) =>{
-                                return <Checkbox_item id={`category_option${index}`} text={text} />
+                                return <Checkboxitem id={`category_option${index}`} text={text} />
                             })
                         }
                     </div>
                     <div className="price">
-                        <p>價格</p>
+                        <p>價格</p> <br/>
+                        {/* FIXME The slider won't center 😥 */}
+                        <DualSlider min={0} max={10000} step={1000}/>
                     </div>
+                    <br/>
                     <div className="fundraise">
                         <p>類型</p>
-                        <Checkbox_item id="fundraise1" text="募資/預售"/>
-                        <Checkbox_item id="fundraise2" text="已上架課程"/>
+                        <Checkboxitem id="fundraise1" text="募資/預售"/>
+                        <Checkboxitem id="fundraise2" text="已上架課程"/>
                     </div>
                     <div className="course_length">
                         <p>課程時長</p>
+                        <DualSlider min={0} max={24} step={2}/>
                     </div>
                     <div className="student_num">
                         <p>學生總人數</p>
+                        <DualSlider min={0} max={1000} step={50}/>
                     </div>
                     <div className="discount">
                         <p>折扣</p>
-                        <Checkbox_item id="discount1" text="有"/>
+                        <Checkboxitem id="discount1" text="有"/>
                     </div>
                 </div> : ""
             }
@@ -59,7 +66,7 @@ export default function SearchPage ()
     )
 }
 
-function Checkbox_item ({id, text})
+function Checkboxitem ({id, text})
 {
     return (
     <>
@@ -68,9 +75,3 @@ function Checkbox_item ({id, text})
     </>
     )
 } 
-
-// TODO: implement this https://www.youtube.com/watch?v=DfSYmk_6vk8&ab_channel=CodingArtist
-function Double_range_slider ()
-{
-    
-}
