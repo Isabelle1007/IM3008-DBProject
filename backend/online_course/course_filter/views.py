@@ -67,6 +67,7 @@ def quick_search(request):
     if request.method == 'POST':
         try:
             content = request.data['Input']
+            method = request.data['Sorting_method']
         except KeyError:
             return Response("No Input Data", status=status.HTTP_400_BAD_REQUEST)
 
@@ -78,7 +79,7 @@ def quick_search(request):
             Q(course_intro__contains=content)).values())
         
         #potential_course = list(Course.objects.filter(course_intro__contains=content).values())
-        result = Course_Return_Form(potential_course)
+        result = Course_Sorting(Course_Return_Form(potential_course), method)
         return Response(result, status=status.HTTP_200_OK)
     else:
         return Response("Request method error.", status=status.HTTP_405_METHOD_NOT_ALLOWED)
