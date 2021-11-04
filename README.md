@@ -20,20 +20,18 @@
 ## Data Collection
 Collect data by web crawling.
 * Hahow
-`import urllib.request as req
-import json
-`
+```import urllib.request as req
+import json```
 * TibaMe: urllib
-`import urllib.request as req
-import json
-`
+```import urllib.request as req
+import json```
 * PressPlay: BeautifulSoup + WebDriver
-`from bs4 import BeautifulSoup
+```from bs4 import BeautifulSoup
 import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
-import re/
+import re```
 * Yotta
 
 
