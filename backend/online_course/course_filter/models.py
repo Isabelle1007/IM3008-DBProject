@@ -3,7 +3,7 @@ from django.db.models.fields import FloatField
 
 # Create your models here.
 class Course(models.Model):
-    course_id = models.AutoField(primary_key=True)
+    course_id = models.TextField(primary_key=True)
     course_name = models.TextField()
     course_intro = models.TextField(blank=True, null=True)
     course_url = models.URLField()
